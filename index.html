@@ -1,21 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
     <meta charset="UTF-8">
-    <title>Page Title</title>
+    <title>Dustin's Tic Tac Toe</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
     <body>
-        <div class="gameboard">
-            <button><p></p></button>
-            <button><p></p></button>
-            <button><p></p></button>
-            <button><p></p></button>
-            <button><p></p></button>
-            <button><p></p></button>
-            <button><p></p></button>
-            <button><p></p></button>
-            <button><p></p></button>
+        <header>
+            <h1>Tic Tac Toe</h1>
+        </header>
+        <div id = "playerNamesMenu">
+            <label for="player1NameField">Player 1 Name:</label>
+            <input type="text" id = "player1NameField" name = "player1NameField" placeholder = "Enter Name: " required>
+            <label for="player2NameField">Player 2 Name:</label>
+            <input type="text" id = "player2NameField" name = "player2NameField" placeholder = "Enter Name: " required>
+            <input type="submit" id="nameSubmit" value="submit">
+        </div>
+        <div id = "gameView">
+            <div id="player1Score">
+                <span>Score</span>
+                <span>0</span>
+            </div>
+            <div id = "gameBoard">
+                <div class = "tile" data-index = '0'></div>
+                <div class = "tile" data-index = '1'></div>
+                <div class = "tile" data-index = '2'></div>
+                <div class = "tile" data-index = '3'></div>
+                <div class = "tile" data-index = '4'></div>
+                <div class = "tile" data-index = '5'></div>
+                <div class = "tile" data-index = '6'></div>
+                <div class = "tile" data-index = '7'></div>
+                <div class = "tile" data-index = '8'></div>
+            </div>
+            <div id="player2Score">
+                <span>Score</span>
+                <span>0</span>
+            </div>
         </div>
     </body>
 </html>
