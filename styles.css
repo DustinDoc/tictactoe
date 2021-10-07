@@ -1,7 +1,62 @@
 @charset "utf-8";
 
-.gameboard{
+header{
+    text-align: center;
+}
+header button{
+    margin-bottom: 10px;
+    width: 150px;
+    height: 30px;
+}
+
+#gameView{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    height: 500px;
+    margin-top: 30px;
+    justify-items: center;
 }
+
+#playerNamesMenu{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#playerNamesMenu > input{
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+#gameBoard{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 400px;
+    width: 400px;
+}
+
+.playerScore{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.vertical{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.horizontal{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+/* .tile{
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+} */
+

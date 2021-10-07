@@ -8,33 +8,43 @@
     <body>
         <header>
             <h1>Tic Tac Toe</h1>
+            <button id="Reset">Reset Current Game</button>
+            <button id="Restart">Start New Game</button>
         </header>
         <div id = "playerNamesMenu">
-            <label for="player1NameField">Player 1 Name:</label>
-            <input type="text" id = "player1NameField" name = "player1NameField" placeholder = "Enter Name: " required>
-            <label for="player2NameField">Player 2 Name:</label>
-            <input type="text" id = "player2NameField" name = "player2NameField" placeholder = "Enter Name: " required>
+            <div>
+                <label for="player1NameField">Player 1 Name:</label>
+                <input type="text" id = "player1NameField" 
+                name = "player1NameField" placeholder = "Enter Name: " 
+                required>
+            </div>
+            <div>
+                <label for="player2NameField">Player 2 Name:</label>
+                <input type="text" id = "player2NameField" 
+                name = "player2NameField" placeholder = "Enter Name: " 
+                required>
+            </div>
             <input type="submit" id="nameSubmit" value="submit">
         </div>
         <div id = "gameView">
-            <div id="player1Score">
-                <span>Score</span>
-                <span>0</span>
+            <div class="playerScore">
+                <div class= "scoreHeader">Player 1 Score</div>
+                <div id="player1Score">0</div>
             </div>
             <div id = "gameBoard">
                 <div class = "tile" data-index = '0'></div>
-                <div class = "tile" data-index = '1'></div>
+                <div class = "tile vertical" data-index = '1'></div>
                 <div class = "tile" data-index = '2'></div>
-                <div class = "tile" data-index = '3'></div>
-                <div class = "tile" data-index = '4'></div>
-                <div class = "tile" data-index = '5'></div>
+                <div class = "tile horizontal" data-index = '3'></div>
+                <div class = "tile horizontal vertical" data-index = '4'></div>
+                <div class = "tile horizontal" data-index = '5'></div>
                 <div class = "tile" data-index = '6'></div>
-                <div class = "tile" data-index = '7'></div>
+                <div class = "tile vertical" data-index = '7'></div>
                 <div class = "tile" data-index = '8'></div>
             </div>
-            <div id="player2Score">
-                <span>Score</span>
-                <span>0</span>
+            <div class="playerScore">
+                <div class= "scoreHeader">Player 2 Score</div>
+                <div id="player2Score">0</div>
             </div>
         </div>
     </body>
