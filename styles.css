@@ -54,9 +54,10 @@ header button{
     border-top: 1px solid black;
     border-bottom: 1px solid black;
 }
-/* .tile{
-    border-width: 1px;
-    border-style: solid;
-    border-color: black;
-} */
+.tile{
+    display: flex;
+    font-size: 7em;
+    align-items: center;
+    justify-content: center;
+}
 
