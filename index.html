@@ -23,11 +23,11 @@
                 name = "player2NameField" placeholder = "Enter Name: " 
                 required>
             </div>
-            <input type="submit" id="nameSubmit" value="submit">
+            <input type="submit" id="nameSubmit" value="Start Game">
         </div>
         <div id = "gameView">
-            <div class="playerScore">
-                <div class= "scoreHeader">Player 1 Score</div>
+            <div class="playerScore hidden">
+                <div id= "player1ScoreHeader">Player 1 Score</div>
                 <div id="player1Score">0</div>
             </div>
             <div id = "gameBoard">
@@ -41,8 +41,8 @@
                 <div class = "tile vertical" data-index = '7'></div>
                 <div class = "tile" data-index = '8'></div>
             </div>
-            <div class="playerScore">
-                <div class= "scoreHeader">Player 2 Score</div>
+            <div class="playerScore hidden">
+                <div id= "player2ScoreHeader">Player 2 Score</div>
                 <div id="player2Score">0</div>
             </div>
         </div>
