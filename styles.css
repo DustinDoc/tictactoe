@@ -3,7 +3,7 @@
 header{
     text-align: center;
 }
-header button{
+.headerButton{
     margin-bottom: 10px;
     width: 150px;
     height: 30px;
@@ -67,3 +67,4 @@ header button{
 .hidden{
     visibility: hidden;
 }
+
