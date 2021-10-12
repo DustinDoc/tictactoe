@@ -43,13 +43,21 @@ const displayController = (() => {
     const headerButtons = document.getElementsByClassName('headerButton');
     const gameTiles = document.getElementsByClassName('tile');
 
-    const initialize = () =>{
+    const setTilesListener = (e) => {
+        gameBoard.placeSymbol(e);
+    }
+
+    const initialize = () => {
         for(let tile of gameTiles){
-            tile.addEventListener('click', (e) => {
-                gameBoard.placeSymbol(e);
-            })
+            tile.addEventListener('click', setTilesListener);
         }
     }
+
+    const disableBoard = () => {
+        for(let tile of gameTiles){
+            tile.removeEventListener('click', setTilesListener);
+        }
+    } 
 
     const renderDisplay = () => {
         for(let i = 0; i < gameTiles.length; i++){
@@ -99,6 +107,7 @@ const displayController = (() => {
 
     return{
         initialize,
+        disableBoard,
         renderDisplay,
         toggleNameMenuOff,
         toggleNameMenuOn,
@@ -175,6 +184,7 @@ const gameController = (() => {
         displayController.toggleScoreViewOff();
         displayController.toggleHeaderButtonsOff();
         gameBoard.resetGameBoard();
+        displayController.disableBoard();
         displayController.renderDisplay();
     })
 
