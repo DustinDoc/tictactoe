@@ -11,16 +11,14 @@ const gameBoard = (() => {
 
     const placeSymbol = (e) => {
         let clickedTile = e.target;
+        let currentTurn = gameController.player1Turn ? gameController.getPlayer1Symbol() : gameController.getPlayer2Symbol();
         if(clickedTile.innerHTML == ""){
-            if(gameController.player1Turn == true){
-                gameBoard.gameBoardArray[clickedTile.dataset.index] = gameController.getPlayer1Symbol();
+                gameBoard.gameBoardArray[clickedTile.dataset.index] = currentTurn;
                 displayController.renderDisplay();
+                if (gameController.checkWin(currentTurn)){
+                    gameController.endGame(false)
+                }
                 gameController.changeTurn();
-            }else{
-                gameBoard.gameBoardArray[clickedTile.dataset.index] = gameController.getPlayer2Symbol();
-                displayController.renderDisplay();
-                gameController.changeTurn();
-            }
         }
     }
 
@@ -42,6 +40,7 @@ const displayController = (() => {
     const playerScoreView = document.getElementsByClassName('playerScore');
     const headerButtons = document.getElementsByClassName('headerButton');
     const gameTiles = document.getElementsByClassName('tile');
+    const winningMessage = document.getElementById('winningMessage');
 
     const setTilesListener = (e) => {
         gameBoard.placeSymbol(e);
@@ -115,15 +114,25 @@ const displayController = (() => {
         toggleHeaderButtonsOn,
         toggleScoreViewOff,
         toggleScoreViewOn,
-        setScoreHeader
+        setScoreHeader,
+        winningMessage
     }
 })();
 
 const gameController = (() => {
-    var player1Turn = true;
+    const player1Turn = true;
     var player1;
     var player2;
-
+    const WINNING_COMBINATIONS = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+    ]
     const getPlayer1Symbol = () => {
         return player1.symbol;
     }
@@ -141,7 +150,7 @@ const gameController = (() => {
     }
 
     const changeTurn = () => {
-        gameController.player1Turn *= -1;
+        gameController.player1Turn = !gameController.player1Turn;
     }
 
     const startNewGame = () => {
@@ -165,6 +174,23 @@ const gameController = (() => {
         displayController.toggleScoreViewOn();
         displayController.toggleNameMenuOff();
         displayController.toggleHeaderButtonsOn();
+    }
+
+    const checkWin = (currentTurn) => {
+        return WINNING_COMBINATIONS.some(combination => {
+            return combination.every(index => {
+                return gameBoard.gameBoardArray[index] == currentTurn;
+            })
+        })
+    }
+
+    const endGame = (draw) => {
+        if(draw) {
+
+        } else {
+            displayController.winningMessage.innerText = 
+            `${gameController.player1Turn ? gameController.getPlayer1Name() : gameController.getPlayer2Name()} Wins!`;
+        }
     }
 
     const startGameButton = document.getElementById('nameSubmit');
@@ -191,6 +217,8 @@ const gameController = (() => {
     return{
         player1Turn,
         changeTurn,
+        checkWin,
+        endGame,
         player1,
         player2,
         getPlayer1Symbol,
