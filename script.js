@@ -1,7 +1,7 @@
 "use strict";
 
 const gameBoard = (() => {
-    const gameBoardArray = new Array(9);
+    const gameBoardArray = ["", "", "", "", "", "", "", "", ""];
 
     const resetGameBoard = () => {
         for(let i = 0; i < gameBoardArray.length; i++){
@@ -17,6 +17,8 @@ const gameBoard = (() => {
                 displayController.renderDisplay();
                 if (gameController.checkWin(currentTurn)){
                     gameController.endGame(false)
+                } else if (gameController.isDraw()){
+                    gameController.endGame(true);
                 }
                 gameController.changeTurn();
         }
@@ -184,9 +186,15 @@ const gameController = (() => {
         })
     }
 
+    const isDraw = () => {
+        return gameBoard.gameBoardArray.every(index => {
+            return index == 'X' || index == 'O';
+        })
+    }
+
     const endGame = (draw) => {
         if(draw) {
-
+            displayController.winningMessage.innerText = "Draw!";
         } else {
             displayController.winningMessage.innerText = 
             `${gameController.player1Turn ? gameController.getPlayer1Name() : gameController.getPlayer2Name()} Wins!`;
@@ -218,6 +226,7 @@ const gameController = (() => {
         player1Turn,
         changeTurn,
         checkWin,
+        isDraw,
         endGame,
         player1,
         player2,
