@@ -40,6 +40,8 @@ const displayController = (() => {
 
     const playerNamesMenu = document.getElementById('playerNamesMenu');
     const playerScoreView = document.getElementsByClassName('playerScore');
+    const player1ScoreElement = document.getElementById('player1Score');
+    const player2ScoreElement = document.getElementById('player2Score');
     const headerButtons = document.getElementsByClassName('headerButton');
     const gameTiles = document.getElementsByClassName('tile');
     const winningMessage = document.getElementById('winningMessage');
@@ -98,6 +100,15 @@ const displayController = (() => {
         }
     }
 
+    const updateScore = () => {
+        player1ScoreElement.textContent = gameController.getPlayer1Score();
+        player2ScoreElement.textContent = gameController.getPlayer2Score();
+    }
+
+    const removeWinningMessage = () => {
+        winningMessage.textContent = "";
+    }
+
     const setScoreHeader = () => {
         let player1ScoreHeader = document.getElementById('player1ScoreHeader');
         let player2ScoreHeader = document.getElementById('player2ScoreHeader');
@@ -117,6 +128,8 @@ const displayController = (() => {
         toggleScoreViewOff,
         toggleScoreViewOn,
         setScoreHeader,
+        updateScore,
+        removeWinningMessage,
         winningMessage
     }
 })();
@@ -151,6 +164,27 @@ const gameController = (() => {
         return player2.name;
     }
 
+    const getPlayer1Score = () => {
+        return player1.score;
+    }
+
+    const getPlayer2Score = () => {
+        return player2.score;
+    }
+
+    const incrementPlayer1Score = () => {
+        player1.score++;
+    }
+
+    const incrementPlayer2Score = () => {
+        player2.score++;
+    }
+
+    const resetScore = () => {
+        player1.score = 0;
+        player2.score = 0;
+    }
+
     const changeTurn = () => {
         gameController.player1Turn = !gameController.player1Turn;
     }
@@ -158,6 +192,7 @@ const gameController = (() => {
     const startNewGame = () => {
         let player1NameField = document.getElementById('player1NameField');
         let player2NameField = document.getElementById('player2NameField');
+        gameController.player1Turn = true;
 
         if(player1NameField.value == ""){
             player1 = player('Player 1', 'X', '0');
@@ -198,6 +233,9 @@ const gameController = (() => {
         } else {
             displayController.winningMessage.innerText = 
             `${gameController.player1Turn ? gameController.getPlayer1Name() : gameController.getPlayer2Name()} Wins!`;
+            `${gameController.player1Turn ? gameController.incrementPlayer1Score() : gameController.incrementPlayer2Score()}`
+            displayController.updateScore();
+            displayController.disableBoard();
         }
     }
 
@@ -210,6 +248,9 @@ const gameController = (() => {
     resetCurrentGameButton.addEventListener('click', () => {
         gameBoard.resetGameBoard();
         displayController.renderDisplay();
+        displayController.initialize();
+        displayController.removeWinningMessage();
+        gameController.player1Turn = true;
     })
 
     const startNewGameButton = document.getElementById('restart');
@@ -220,6 +261,9 @@ const gameController = (() => {
         gameBoard.resetGameBoard();
         displayController.disableBoard();
         displayController.renderDisplay();
+        displayController.removeWinningMessage();
+        resetScore();
+        displayController.updateScore();
     })
 
     return{
@@ -233,7 +277,11 @@ const gameController = (() => {
         getPlayer1Symbol,
         getPlayer2Symbol,
         getPlayer1Name,
-        getPlayer2Name
+        getPlayer2Name,
+        getPlayer1Score,
+        getPlayer2Score,
+        incrementPlayer1Score,
+        incrementPlayer2Score
     }
 })();
 
